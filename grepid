@@ -1,0 +1,20 @@
+#!/bin/bash 
+shopt -s -o nounset
+
+PROJECT_HOME="$PWD"
+project="tmp"
+if test ! -f "${project}.id"; then
+  touch ${PROJECT_HOME}/${project}.id
+fi
+echo "*.c text" > ${PROJECT_HOME}/${project}.id
+echo "*.cpp text" >> ${PROJECT_HOME}/${project}.id
+echo "*.h text" >> ${PROJECT_HOME}/${project}.id
+echo "*.js text" >> ${PROJECT_HOME}/${project}.id
+echo "*.s text" >> ${PROJECT_HOME}/${project}.id
+echo "*.S text" >> ${PROJECT_HOME}/${project}.id
+echo "Makefile text" >> ${PROJECT_HOME}/${project}.id
+echo "*.mk text" >> ${PROJECT_HOME}/${project}.id
+
+shopt -s extglob
+mkid -m ${PROJECT_HOME}/${project}.id !(obj*)
+
